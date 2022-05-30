@@ -67,7 +67,7 @@ class _ProductListingState extends State<ProductListing> {
                 itemCount: 4,
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 0.86,crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10),
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 0.76,crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10),
                 itemBuilder: (context,index){
                   return Container(
                     child: Column(
@@ -85,8 +85,19 @@ class _ProductListingState extends State<ProductListing> {
                         Container(
                           child: Text("\$15.0",style: productListingPrice,),
                         ),
+                        SizedBox(height: 10,),
                         Container(
                           child: ElevatedButton(
+                            onPressed: (){},
+                            child: Text('Add to Basket',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 17),),
+                            style: ElevatedButton.styleFrom(
+                                // shadowColor: Colors.red,
+                                primary: Color(0xff7A7AAE),
+                              padding: EdgeInsets.symmetric(vertical: 13,horizontal: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(40),
+                              )
+                            ),
 
                           ),
                         )
