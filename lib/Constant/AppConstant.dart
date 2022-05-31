@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 const AppbarColor = Color(0xffecb301);
+const MainColor = Color(0xffecb301);
 
 
 
@@ -14,6 +15,8 @@ const share = "Asset/icon/awesome-share-alt.png";
 const down = "Asset/icon/down.png";
 const teddy = "Asset/icon/teddy.jpg";
 const doubleArrow = "Asset/icon/arrow.png";
+const plus = "Asset/icon/plus.png";
+const minus = "Asset/icon/Minus.png";
 
 
 //Product Page
@@ -22,3 +25,11 @@ const productTitle = TextStyle(fontSize:14,color: Colors.white,fontWeight: FontW
 const productListingTitle = TextStyle(fontSize: 12,color: Colors.grey,);
 const productListingName = TextStyle(fontSize: 13,color: Colors.black,fontWeight: FontWeight.w600);
 const productListingPrice = TextStyle(fontSize:20,color: Color(0xff7a7aae),fontWeight: FontWeight.w800);
+
+const ProductDetailTitle=TextStyle(fontSize: 18, fontWeight:FontWeight.w500,color: Colors.black);
+const ProductDetailDelivery=TextStyle(fontSize:13,color: Colors.black);
+const ProductDetailOriginalPrice=TextStyle(fontSize:13,color: Colors.grey,decoration:TextDecoration.lineThrough);
+const ProductDetailCounter=TextStyle(fontSize:15,color: Colors.black,fontWeight: FontWeight.w600);
+
+const ProductDetailSelect = TextStyle(fontWeight: FontWeight.w800,color: Colors.black);
+const ProductDetailDescription=TextStyle(fontWeight: FontWeight.w200,color: Colors.black87,fontSize: 14);

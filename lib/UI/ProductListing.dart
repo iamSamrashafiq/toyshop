@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:toyshop/Constant/AppConstant.dart';
+import 'package:toyshop/UI/ProductDetail.dart';
+import 'package:toyshop/Widgets/CustomElevatedButton.dart';
 
 
 class ProductListing extends StatefulWidget {
@@ -69,40 +71,38 @@ class _ProductListingState extends State<ProductListing> {
                 scrollDirection: Axis.vertical,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 0.76,crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10),
                 itemBuilder: (context,index){
-                  return Container(
-                    child: Column(
-                      children: [
-                        Container(
-                          child: Image.asset('Asset/icon/plush.png',width:100,),
-                        ),
-                        Text('Timeless Toy',style: productListingTitle,),
-                        SizedBox(height: 3,),
-                        Container(
-                          width:140,
-                            child: Text(
-                                'Luster Dragon Stuffed Toy',style: productListingName,textAlign: TextAlign.center,)
-                        ),
-                        Container(
-                          child: Text("\$15.0",style: productListingPrice,),
-                        ),
-                        SizedBox(height: 10,),
-                        Container(
-                          child: ElevatedButton(
-                            onPressed: (){},
-                            child: Text('Add to Basket',style: TextStyle(fontWeight: FontWeight.w800,fontSize: 17),),
-                            style: ElevatedButton.styleFrom(
-                                // shadowColor: Colors.red,
-                                primary: Color(0xff7A7AAE),
-                              padding: EdgeInsets.symmetric(vertical: 13,horizontal: 20),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(40),
-                              )
-                            ),
-
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductDetails()));
+                    },
+                    child: Container(
+                      child: Column(
+                        children: [
+                          Container(
+                            child: Image.asset('Asset/icon/plush.png',width:100,),
                           ),
-                        )
-                        
-                      ],
+                          Text('Timeless Toy',style: productListingTitle,),
+                          SizedBox(height: 3,),
+                          Container(
+                            width:140,
+                              child: Text(
+                                  'Luster Dragon Stuffed Toy',style: productListingName,textAlign: TextAlign.center,)
+                          ),
+                          Container(
+                            child: Text("\$15.0",style: productListingPrice,),
+                          ),
+                          SizedBox(height: 10,),
+                          Container(
+                            child: CustomElevatedButton(
+                              text: 'Add to Bucket',
+                              onPress: (){},
+                              Color: MainColor,
+                              Padding: EdgeInsets.symmetric(vertical:13,horizontal: 20),
+                            ),
+                          )
+
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -115,3 +115,4 @@ class _ProductListingState extends State<ProductListing> {
     );
   }
 }
+
