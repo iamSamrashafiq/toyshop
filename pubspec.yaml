@@ -37,6 +37,7 @@ dependencies:
   http:
   provider:
   flutter_rating_bar: ^4.0.1
+  page_transition: 
 
 dev_dependencies:
   flutter_test:

@@ -1,50 +1,31 @@
 import 'package:flutter/material.dart';
-import 'package:toyshop/Component/SubCategoryUI.dart';
+import 'package:toyshop/Component/CategoryUI.dart';
 import 'package:toyshop/Constant/AppConstant.dart';
 import 'package:toyshop/Constant/ImageConstant.dart';
-import 'package:toyshop/Models/SubCategoryModel.dart';
+import 'package:toyshop/Models/CategoryModel.dart';
 import 'package:toyshop/Services/Api/api_response.dart';
-import 'package:toyshop/Services/SubCategoryService/SubCategoryService.dart';
-import 'package:toyshop/UI/ProductListing.dart';
+import 'package:toyshop/Services/CategoryService/CategoryService.dart';
 import 'package:toyshop/Widgets/CustomLoader.dart';
 import 'package:toyshop/Widgets/ShowError.dart';
 
-class SubCategoryScreen extends StatelessWidget {
-   String id;
-   String  title;
-   SubCategoryScreen({Key key,this.id,this.title}) : super(key: key);
+class CategoryUi extends StatefulWidget {
+  const CategoryUi({Key key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return SubCategory(id: this.id,title: this.title,);
-  }
+  State<CategoryUi> createState() => _CategoryUiState();
 }
 
+class _CategoryUiState extends State<CategoryUi> {
 
-
-class SubCategory extends StatefulWidget {
-  String id;
-  String title;
-  SubCategory({Key key,this.id,this.title}) : super(key: key);
-
-  @override
-  State<SubCategory> createState() => _SubCategoryState();
-}
-
-class _SubCategoryState extends State<SubCategory> {
-
-  Future<ApiResponse<SubCategoryResponseModel>> _subcategories;
-
-
-
+  Future<ApiResponse<CategoryResponseModel>> _categories;
   @override
   void initState() {
-    _subcategories = SubCategoryService().getSubCategory(context, widget.id);
+    _categories = CategoryService().getCategory(context);
     super.initState();
   }
   Future _handleReFresh() async{
     setState(() {
-      _subcategories =SubCategoryService().getSubCategory(context, widget.id);
+      _categories = CategoryService().getCategory(context);
     });
   }
 
@@ -58,31 +39,25 @@ class _SubCategoryState extends State<SubCategory> {
           elevation: 0,
           backgroundColor: AppbarColor,
           shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(30),
-                bottomRight: Radius.circular(30),
-              )
+            borderRadius: BorderRadius.only(
+              bottomLeft: Radius.circular(30),
+              bottomRight: Radius.circular(30),
+            )
           ),
           leadingWidth: 40,
-          leading: GestureDetector(
-            onTap: (){
-              Navigator.of(context).pop();
-            },
-            child: Container(
-              margin: EdgeInsets.only(left: 20),
-              child: Image.asset(arrowBack),
-            ),
+          leading: Container(
+            margin: EdgeInsets.only(left: 20),
+            child: Image.asset(arrowBack),
           ),
-          title: Text('Subcategories',style: appbarTitle,),
+          title: Text('Categories',style: appbarTitle,),
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
+        body: SingleChildScrollView(
+          child: SafeArea(
             child: Column(
               children: [
-                SizedBox(height: size.height*0.03,),
                 Container(
                   child: StreamBuilder(
-                    stream:_subcategories.asStream(),
+                    stream:_categories.asStream(),
                     builder: (context,snapshot){
                       switch(snapshot.connectionState){
                         case  ConnectionState.waiting:
@@ -95,7 +70,7 @@ class _SubCategoryState extends State<SubCategory> {
                                 return Center(child: GifLoader());
                                 break;
                               case Status.COMPLETED:
-                                return SubCategoryView(heading: widget.title,);
+                                return CategoryUiScreen();
                                 break;
                               case Status.ERROR:
                                 print(snapshot.data.message);
@@ -117,8 +92,6 @@ class _SubCategoryState extends State<SubCategory> {
                     },
                   ),
                 ),
-
-
               ],
             ),
           ),
