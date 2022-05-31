@@ -32,4 +32,12 @@ const ProductDetailOriginalPrice=TextStyle(fontSize:13,color: Colors.grey,decora
 const ProductDetailCounter=TextStyle(fontSize:15,color: Colors.black,fontWeight: FontWeight.w600);
 
 const ProductDetailSelect = TextStyle(fontWeight: FontWeight.w800,color: Colors.black);
-const ProductDetailDescription=TextStyle(fontWeight: FontWeight.w200,color: Colors.black87,fontSize: 14);
+const ProductDetailDescription=TextStyle(fontWeight: FontWeight.w400,color: Colors.black54,fontSize: 14);
+
+const ProductReviewTitle = TextStyle(fontWeight: FontWeight.w600,color: Colors.black87,fontSize: 14);
+const ProductReviewAdd = TextStyle(fontWeight: FontWeight.w600,color: Colors.grey,fontSize: 14,decoration:TextDecoration.underline );
+const ProductReviewName =TextStyle(fontSize: 15,color: Colors.black,);
+const ProductReviewRating =TextStyle(fontSize: 13,color: Colors.black87,);
+
+const ProductReviewTime =TextStyle(fontSize: 12,color: Colors.grey,);
+const ProductReviewDescription =TextStyle(fontSize: 14,color: Colors.grey,);

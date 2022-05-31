@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:toyshop/Constant/AppConstant.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:toyshop/Widgets/CustomElevatedButton.dart';
+import 'package:toyshop/Widgets/RatingWidget.dart';
 
 class ProductDetails extends StatefulWidget {
   const ProductDetails({Key key}) : super(key: key);
@@ -72,27 +73,41 @@ class _ProductDetailsState extends State<ProductDetails> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 10,),
-                    RatingBar(
-                        initialRating: 0,
-                        direction: Axis.horizontal,
-                        allowHalfRating: true,
-                        itemCount: 5,
-                        itemSize: 25,
-                        ratingWidget: RatingWidget(
-                            full: const Icon(Icons.star, color: Colors.orange,),
-                            half: const Icon(
-                              Icons.star_half,
-                              color: Colors.orange,
-                            ),
-                            empty: const Icon(
-                              Icons.star_outline,
-                              color: Colors.orange,
-                            )),
-                        onRatingUpdate: (value) {
+                    Row(
+                      children: [
+                        RatingBarWidget(
+                          initialCount: 5,
+                          itemSize: 25,
+                          onRatingUpdate: (value){
                           setState(() {
                             _ratingValue = value;
                           });
-                        }),
+                          },
+                        ),
+                        Text('(5)',style: ProductReviewRating,),
+                      ],
+                    ),
+                    // RatingBar(
+                    //     initialRating: 0,
+                    //     direction: Axis.horizontal,
+                    //     allowHalfRating: true,
+                    //     itemCount: 5,
+                    //     itemSize: 25,
+                    //     ratingWidget: RatingWidget(
+                    //         full: const Icon(Icons.star, color: Colors.orange,),
+                    //         half: const Icon(
+                    //           Icons.star_half,
+                    //           color: Colors.orange,
+                    //         ),
+                    //         empty: const Icon(
+                    //           Icons.star_outline,
+                    //           color: Colors.orange,
+                    //         )),
+                    //     onRatingUpdate: (value) {
+                    //       setState(() {
+                    //         _ratingValue = value;
+                    //       });
+                    //     }),
                     Container(
                       margin: EdgeInsets.only(top: 5),
                       child: Text('Luster Dragon Stuffed Toys',style: ProductDetailTitle,),
@@ -330,44 +345,12 @@ class _ProductDetailsState extends State<ProductDetails> {
              ),
 
               SizedBox(height: 15,),
-
-             // Container(
-             //   child: Row(
-             //     children: [
-             //       Container(
-             //         width:20,
-             //         height: 20,
-             //         decoration: BoxDecoration(
-             //           shape: BoxShape.circle,
-             //           color: Colors.amber,
-             //         ),
-             //       ),
-             //       Container(
-             //         width:20,
-             //         height: 20,
-             //         decoration: BoxDecoration(
-             //           shape: BoxShape.circle,
-             //           color: Colors.orange,
-             //         ),
-             //       ),
-             //       Container(
-             //         width:20,
-             //         height: 20,
-             //         decoration: BoxDecoration(
-             //           shape: BoxShape.circle,
-             //           color: Colors.pink,
-             //         ),
-             //       )
-             //     ],
-             //   ),
-             // ),
-
              Container(
                child: Row(
                  mainAxisAlignment: MainAxisAlignment.center,
                  children: [
                    Container(
-                     padding:EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                     padding:EdgeInsets.symmetric(vertical: 10,horizontal: 15),
                      decoration: BoxDecoration(
                        color: Colors.white,
                        shape: BoxShape.circle,
@@ -405,24 +388,91 @@ class _ProductDetailsState extends State<ProductDetails> {
                  ],
                ),
              ),
-
              Container(
-
                padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
                width: size.width*0.99,
                child: Text('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever'
                    ' since the when an unknown printer took a galley of type and scrambled it to make a type specimen book.',style: ProductDetailDescription,),
              ),
+             Container(
+               padding: EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+               child: Row(
+                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                 children: [
+                   Container(
+                     child: Text('Rate & Reviews',style: ProductReviewTitle,),
+                   ),
+                   Container(
+                     child: Text('Add your review',style: ProductReviewAdd,),
+                   ),
+                 ],
+               ),
+             ),
 
-
-
-
-
-
-
-
-
-
+             Container(
+               child: ListView.builder(
+                 itemCount: 2,
+                 shrinkWrap: true,
+                 scrollDirection: Axis.vertical,
+                 itemBuilder: (context,index){
+                   return Container(
+                     padding: EdgeInsets.symmetric(vertical: 10,horizontal: 10),
+                     child:Column(
+                       crossAxisAlignment: CrossAxisAlignment.start,
+                       children: [
+                         Container(
+                           child: Row(
+                             children: [
+                               Container(
+                                 width: 50,
+                                 height: 50,
+                                 decoration: BoxDecoration(
+                                   shape: BoxShape.circle,
+                                   image: DecorationImage(
+                                       image: NetworkImage('https://googleflutter.com/sample_image.jpg'),
+                                       fit: BoxFit.fill
+                                   ),
+                                 ),
+                               ),
+                               SizedBox(width: 7,),
+                               Container(
+                                 child: Column(
+                                   crossAxisAlignment: CrossAxisAlignment.start,
+                                   children: [
+                                     Text('John Doe Smith',style: ProductReviewName,),
+                                     Row(
+                                       children: [
+                                         RatingBarWidget(
+                                             initialCount: 5,
+                                           itemSize:15,
+                                         ),
+                                         Text('(5)',style: ProductReviewRating,)
+                                       ],
+                                     ),
+                                   ],
+                                 ),
+                               ),
+                               SizedBox(width: size.width*0.4,),
+                               Container(
+                                 child: Text('12 Min Ago',style:ProductReviewTime ,),
+                               )
+                             ],
+                           ),
+                         ),
+                         Container(
+                           margin:EdgeInsets.symmetric(horizontal: 10,vertical: 10),
+                           child: Text('lorem ipsum lorem ipsum lorem ipsum', style: ProductReviewDescription,),
+                         ),
+                         SizedBox(
+                           height: 10,
+                         ),
+                         Divider(color: Colors.grey.shade300,indent: 10,endIndent: 10,thickness: 2,)
+                       ],
+                     ) ,
+                   );
+                 },
+               ),
+             ),
             ],
           ),
         ),
