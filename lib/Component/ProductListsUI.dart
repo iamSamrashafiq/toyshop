@@ -14,22 +14,25 @@ class ProductListsUI extends StatelessWidget {
     return Consumer<ProductProvider>(
       builder: (context,lists,child){
         final listing = lists.productListingModel.data.collection.products.data;
-        return Container(
+        return listing.length > 0 ?
+          Container(
+          padding: EdgeInsets.symmetric(vertical: 20),
           child: GridView.builder(
             itemCount: listing.length,
             shrinkWrap: true,
             scrollDirection: Axis.vertical,
+            physics: BouncingScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio: 0.76,crossAxisCount: 2,crossAxisSpacing: 10,mainAxisSpacing: 10),
             itemBuilder: (context,index){
               return GestureDetector(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductDetails()));
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductDetails(id:listing[index].id.toString(),title: listing[index].name.en.toString() ,)));
                 },
                 child: Container(
                   child: Column(
                     children: [
                       Container(
-                        child: Image.network('https://alpha3.mytechnology.ae/playpapa//images/timthumb.php?src=/'+listing[index].image.toString(),width:100,),
+                        child: Image.network(listing[index].defaultImage,width:140,),
                       ),
                       Text(listing[index].supplier.name.en.toString()??"",style: TextStyle(fontSize: 12,color: Colors.grey,),),
                       SizedBox(height: 3,),
@@ -39,7 +42,7 @@ class ProductListsUI extends StatelessWidget {
                             listing[index].name.en.toString()??"",style:  TextStyle(fontSize: 13,color: Colors.black,fontWeight: FontWeight.w600),textAlign: TextAlign.center,)
                       ),
                       Container(
-                        child: Text(listing[index].price.toString()??"",style: TextStyle(fontSize:20,color: Color(0xff7a7aae),fontWeight: FontWeight.w800),),
+                        child: Text('\$'+listing[index].price.toString()??"",style: TextStyle(fontSize:20,color: Color(0xff7a7aae),fontWeight: FontWeight.w800),),
                       ),
                       SizedBox(height: 10,),
                       Container(
@@ -56,6 +59,10 @@ class ProductListsUI extends StatelessWidget {
               );
             },
           ),
+        ): Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Center(
+              child: Text('No Data Available',style: TextStyle(fontSize: 18,fontWeight: FontWeight.w800),)),
         );
       },
     );

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:toyshop/Constant/AppConstant.dart';
 import 'package:toyshop/Constant/ImageConstant.dart';
 import 'package:toyshop/Provider/ProductProvider.dart';
 import 'package:toyshop/UI/SubCategory.dart';
@@ -24,14 +23,14 @@ class CategoryUiScreen extends StatelessWidget {
         builder: (context, allCategories, child) {
           final data  = allCategories.categoryResponseModel.allData;
           return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+              padding: const EdgeInsets.symmetric(vertical: 10,horizontal: 10),
               child: Container(
                 child: GridView.builder(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   itemCount: data.length,
                   physics: BouncingScrollPhysics(),
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio:0.87,crossAxisCount: 2,crossAxisSpacing: 13 ),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(childAspectRatio:0.79,crossAxisCount: 2,crossAxisSpacing: 13, ),
                   itemBuilder:(context,index){
                     return GestureDetector(
                       onTap: (){
@@ -44,7 +43,7 @@ class CategoryUiScreen extends StatelessWidget {
                               top: 40,
                               child: Container(
                                 width:size.width*0.45,
-                                height: size.height*0.27,
+                                height: size.height*0.22,
                                 decoration: BoxDecoration(
                                   color: colorList[index],
                                   borderRadius: BorderRadius.circular(20),
@@ -52,29 +51,29 @@ class CategoryUiScreen extends StatelessWidget {
                               ),
                             ),
                             Positioned(
-                              left: size.width*0.07,
+                              left: size.width*0.06,
                               child: Container(
-                                child: Image.network("https://alpha3.mytechnology.ae/playpapa//images/timthumb.php?src=/"+ data[index].image,width: 130,),
+                                child: Image.network("https://alpha3.mytechnology.ae/playpapa//images/timthumb.php?src=/"+ data[index].image,width: 120,),
                               ),
                             ),
                             Positioned(
-                              top: size.height*0.18,
-                              left: size.width*0.06,
+                              top: size.height*0.17,
+                              left: size.width*0.03,
                               child: Container(
                                 // margin: EdgeInsets.only(top:size.height*0.21,left: 40),
                                 width: 150,
-                                child: Text(data[index].title.en.toString(),textAlign: TextAlign.center,style:TextStyle(fontSize:14,color: Colors.white,fontWeight: FontWeight.w600),),
+                                child: Text(data[index].title.en.toString(),textAlign: TextAlign.center,style:TextStyle(fontSize:13,color: Colors.white,fontWeight: FontWeight.w500),),
                               ),
                             ),
                             Positioned(
-                              top: size.height*0.25,
+                              top: size.height*0.22,
                               left: size.width*0.2,
                               child: InkWell(
                                 onTap: (){
                                   Navigator.of(context).push(MaterialPageRoute(builder: (context)=>SubCategoryScreen(id:data[index].id.toString(),title:data[index].title.en.toString()  ,)));
                                 },
                                 child: Container(
-                                  child: Image.asset(down,height: size.height*0.04,),
+                                  child: Image.asset(down,height: size.height*0.03,),
                                 ),
                               ),
                             ),

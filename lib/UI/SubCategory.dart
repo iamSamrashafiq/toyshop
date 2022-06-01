@@ -5,7 +5,6 @@ import 'package:toyshop/Constant/ImageConstant.dart';
 import 'package:toyshop/Models/SubCategoryModel.dart';
 import 'package:toyshop/Services/Api/api_response.dart';
 import 'package:toyshop/Services/SubCategoryService/SubCategoryService.dart';
-import 'package:toyshop/UI/ProductListing.dart';
 import 'package:toyshop/Widgets/CustomLoader.dart';
 import 'package:toyshop/Widgets/ShowError.dart';
 
@@ -73,7 +72,7 @@ class _SubCategoryState extends State<SubCategory> {
               child: Image.asset(arrowBack),
             ),
           ),
-          title: Text('Subcategories',style: appbarTitle,),
+          title: Text('Subcategories',style: TextStyle(fontSize: 17,color: Colors.white,fontWeight: FontWeight.w700),),
         ),
         body: SafeArea(
           child: SingleChildScrollView(

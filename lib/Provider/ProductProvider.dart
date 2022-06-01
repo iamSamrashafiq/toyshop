@@ -5,12 +5,31 @@ import 'package:toyshop/Models/ProductListingModel.dart';
 import 'package:toyshop/Models/SubCategoryModel.dart';
 
 class ProductProvider extends ChangeNotifier{
+  int _counter = 0;
   bool _loader;
-
   CategoryResponseModel _categoryResponseModel;
   SubCategoryResponseModel  _subCategoryResponseModel;
   ProductListingModel  _productListingModel;
   ProductDetailResponse _productDetailResponse;
+
+
+///counter
+  getCounter() => _counter;
+  setCounter(int counter) => _counter = counter;
+
+  void incrementCounter() {
+    _counter ==0 ?_counter=1 :_counter++;
+    //_counter++;
+    notifyListeners();
+  }
+
+  void decrementCounter() {
+    _counter <= 1 ? _counter = 1 : _counter--;
+    notifyListeners();
+  }
+
+
+
 
   CategoryResponseModel get categoryResponseModel => _categoryResponseModel;
 

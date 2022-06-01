@@ -6,7 +6,6 @@ import 'package:toyshop/Constant/AppConstant.dart';
 import 'package:toyshop/Constant/RouteConstants.dart';
 import 'package:toyshop/Provider/ProductProvider.dart';
 import 'package:toyshop/Routes/AppRoutes.dart';
-import 'package:toyshop/UI/Category.dart';
 
 void main() {
 
@@ -32,10 +31,12 @@ List<SingleChildWidget> providers = [
 class MyApp extends StatelessWidget {
   const MyApp({Key key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return
+
+
+      MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: RouteConstants.initialRoute,
       onGenerateRoute: RouteGenerator.generateRoute,

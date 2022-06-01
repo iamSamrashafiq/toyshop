@@ -5,6 +5,7 @@ import 'package:toyshop/Constant/ImageConstant.dart';
 import 'package:toyshop/Models/CategoryModel.dart';
 import 'package:toyshop/Services/Api/api_response.dart';
 import 'package:toyshop/Services/CategoryService/CategoryService.dart';
+import 'package:toyshop/Widgets/CustomElevatedButton.dart';
 import 'package:toyshop/Widgets/CustomLoader.dart';
 import 'package:toyshop/Widgets/ShowError.dart';
 
@@ -49,7 +50,7 @@ class _CategoryUiState extends State<CategoryUi> {
             margin: EdgeInsets.only(left: 20),
             child: Image.asset(arrowBack),
           ),
-          title: Text('Categories',style: appbarTitle,),
+          title: Text('Categories',style: TextStyle(fontSize: 17,color: Colors.white,fontWeight: FontWeight.w700),),
         ),
         body: SingleChildScrollView(
           child: SafeArea(
@@ -74,9 +75,22 @@ class _CategoryUiState extends State<CategoryUi> {
                                 break;
                               case Status.ERROR:
                                 print(snapshot.data.message);
-                                return ShowError(
-                                    errorMessage: snapshot.data.message,
-                                    onRetryPressed: () => _handleReFresh()
+                                return Container(
+                                  padding: EdgeInsets.symmetric(vertical: 20,horizontal: 10),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                        Text('Some Error Here. Try Again'),
+                                        SizedBox(height: size.height*0.1,),
+                                        CustomElevatedButton(
+                                            text: 'Try Again',
+                                            Color: MainColor,
+                                            onPress: (){
+                                              _handleReFresh();
+                                            },
+                                            Padding: EdgeInsets.symmetric(vertical: 13,horizontal: 30))
+                                    ],
+                                  ),
                                 );
 
                                 break;

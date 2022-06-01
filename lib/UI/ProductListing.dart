@@ -5,8 +5,6 @@ import 'package:toyshop/Constant/ImageConstant.dart';
 import 'package:toyshop/Models/ProductListingModel.dart';
 import 'package:toyshop/Services/Api/api_response.dart';
 import 'package:toyshop/Services/ProductListingService/ProductListService.dart';
-import 'package:toyshop/UI/ProductDetail.dart';
-import 'package:toyshop/Widgets/CustomElevatedButton.dart';
 import 'package:toyshop/Widgets/CustomLoader.dart';
 import 'package:toyshop/Widgets/ShowError.dart';
 
@@ -18,26 +16,23 @@ class ProductLists extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ProductListing(
+    return ProductListingFull(
       catId: this.catId, subId: this.subId,title: this.title,
     );
   }
 }
 
-
-
-
-class ProductListing extends StatefulWidget {
+class ProductListingFull extends StatefulWidget {
   String catId;
   String subId;
   String title;
-  ProductListing({Key key,this.catId,this.subId,this.title}) : super(key: key);
+  ProductListingFull({Key key,this.catId,this.subId,this.title}) : super(key: key);
 
   @override
-  State<ProductListing> createState() => _ProductListingState();
+  State<ProductListingFull> createState() => _ProductListingFullState();
 }
 
-class _ProductListingState extends State<ProductListing> {
+class _ProductListingFullState extends State<ProductListingFull> {
   Future<ApiResponse<ProductListingModel>> _listing;
   @override
   void initState() {
@@ -66,11 +61,16 @@ class _ProductListingState extends State<ProductListing> {
               )
           ),
           leadingWidth: 40,
-          leading: Container(
-            margin: EdgeInsets.only(left: 20),
-            child: Image.asset(arrowBack),
+          leading: GestureDetector(
+            onTap: (){
+              Navigator.pop(context);
+            },
+            child: Container(
+              margin: EdgeInsets.only(left: 20),
+              child: Image.asset(arrowBack),
+            ),
           ),
-          title: Text(widget.title??"",style: appbarTitle,),
+          title: Text(widget.title??"",style: TextStyle(fontSize: 17,color: Colors.white,fontWeight: FontWeight.w700),),
           actions: [
             Padding(
               padding: EdgeInsets.only(right: 10),
@@ -103,46 +103,48 @@ class _ProductListingState extends State<ProductListing> {
           ],
         ),
         body: SafeArea(
-          child: Column(
-            children: [
-              Container(
-                child: StreamBuilder(
-                  stream:_listing.asStream(),
-                  builder: (context,snapshot){
-                    switch(snapshot.connectionState){
-                      case  ConnectionState.waiting:
-                        return Center(child: GifLoader());
-                        break;
-                      default:
-                        if (snapshot.hasData) {
-                          switch (snapshot.data.status) {
-                            case Status.LOADING:
-                              return Center(child: GifLoader());
-                              break;
-                            case Status.COMPLETED:
-                              return Container();
-                              break;
-                            case Status.ERROR:
-                              print(snapshot.data.message);
-                              return ShowError(
-                                  errorMessage: snapshot.data.message,
-                                  onRetryPressed: () => _handleReFresh()
-                              );
-                              break;
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Container(
+                  child: StreamBuilder(
+                    stream:_listing.asStream(),
+                    builder: (context,snapshot){
+                      switch(snapshot.connectionState){
+                        case  ConnectionState.waiting:
+                          return Center(child: GifLoader());
+                          break;
+                        default:
+                          if (snapshot.hasData) {
+                            switch (snapshot.data.status) {
+                              case Status.LOADING:
+                                return Center(child: GifLoader());
+                                break;
+                              case Status.COMPLETED:
+                                return ProductListsUI();
+                                break;
+                              case Status.ERROR:
+                                print(snapshot.data.message);
+                                return ShowError(
+                                    errorMessage: snapshot.data.message,
+                                    onRetryPressed: () => _handleReFresh()
+                                );
+                                break;
+                            }
                           }
-                        }
-                        return ShowError(
-                            height: size.height*0.3,
-                            width: double.infinity,
-                            errorMessage: "An unexpected Error Occurred",
-                            onRetryPressed: () => _handleReFresh());
-                        break;
-                    }
-                  },
+                          return ShowError(
+                              height: size.height*0.3,
+                              width: double.infinity,
+                              errorMessage: "An unexpected Error Occurred",
+                              onRetryPressed: () => _handleReFresh());
+                          break;
+                      }
+                    },
+                  ),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
         ),
       ),

@@ -12,7 +12,7 @@ class CustomElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: onPress,
-      child: Text(text,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 17),),
+      child: Text(text,style: TextStyle(fontWeight: FontWeight.w800,fontSize: 15),),
       style: ElevatedButton.styleFrom(
         // shadowColor: Colors.red,
           primary: Color,

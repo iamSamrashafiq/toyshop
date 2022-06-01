@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:toyshop/Constant/ApiEndPoints.dart';
-import 'package:toyshop/Models/CategoryModel.dart';
 import 'package:toyshop/Models/ProductDetailModel.dart';
-import 'package:toyshop/Models/ProductListingModel.dart';
 import 'package:toyshop/Provider/ProductProvider.dart';
 import 'package:toyshop/Services/Api/api.dart';
 import 'package:toyshop/Services/Api/api_exception.dart';

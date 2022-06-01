@@ -18,6 +18,7 @@ class SubCategoryView extends StatelessWidget {
           Column(
           children: [
             Container(
+              height: size.height*0.15,
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Stack(
                 children: [
@@ -25,7 +26,7 @@ class SubCategoryView extends StatelessWidget {
                     top:30,
                     child: Container(
                       width: size.width*0.9,
-                      height: size.height*0.11,
+                      height: size.height*0.09,
                       decoration: BoxDecoration(
                         color: Color(0xff24D0CC),
                         borderRadius: BorderRadius.circular(20),
@@ -33,9 +34,9 @@ class SubCategoryView extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                      top: size.height*0.08,
+                      top: 55,
                       left: 10,
-                      child:Text(heading??"",style: TextStyle(fontSize: 17,fontWeight: FontWeight.w600,color: Colors.white),)
+                      child:Text(heading??"",style: TextStyle(fontSize: 15,fontWeight: FontWeight.w600,color: Colors.white),)
                   ),
 
                   Align(
@@ -63,10 +64,11 @@ class SubCategoryView extends StatelessWidget {
                         children: [
                           InkWell(
                             onTap:(){
-                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductListing()));
+                              Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductLists(catId:sub[index].parentId.toString(),
+                                  subId:sub[index].id.toString(),title: sub[index].title.en.toString() ,)));
                             },
                             child: ListTile(
-                              title: Text(sub[index].title.en.toString(),style: TextStyle(fontSize: 15,color: Colors.black87),),
+                              title: Text(sub[index].title.en.toString(),style: TextStyle(fontSize: 13,color: Colors.black87),),
                               trailing: Image.asset(doubleArrow,width: 13,),
                             ),
                           ),
