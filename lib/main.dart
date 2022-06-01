@@ -25,7 +25,6 @@ void main() {
 List<SingleChildWidget> providers = [
   ChangeNotifierProvider<ProductProvider>(create: (_) => ProductProvider()),
 
-
 ];
 
 class MyApp extends StatelessWidget {
